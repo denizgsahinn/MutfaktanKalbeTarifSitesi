@@ -1,0 +1,79 @@
+﻿h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    color: dimgray;
+    font-family: Calibri;
+    background-image: url('../../assets/images/pastel-background-light.png');
+    background-position: center;
+}
+
+.FormContainer {
+  
+    width: 450px;
+    min-height: 500px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    margin: 0px auto;
+    /*margin-top: 300px;*/
+    margin-top: 80px;
+    background-color:aliceblue;
+}
+
+.ContainerTitle {
+    background-color: #872ca7;
+    color: white;
+    text-align: center;
+    font-family:'Century Gothic';
+    padding: 20px 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.contentContainer{
+    margin:10px;
+    padding:20px;
+}
+.textBox {
+    width: 340px;
+    margin: 10px 0;
+    border: 1px solid silver;
+    border-radius: 5px;
+    padding: 10px;
+}
+.Label{
+
+    font-weight:700;
+    color:black;
+    padding-top:30px;
+}
+.info{
+    
+    margin-left:auto;
+    margin-right:auto;
+    padding:5px;
+}
+.girisButton {
+    color: white;
+    text-align:center;
+    font-size: 11pt;
+    background-color:mediumvioletred;
+    padding:10px;
+    margin-left: 130px;
+    margin-top:30px;
+    width:120px;
+    height:40px;
+    border: 1px solid #8d1c6f;
+    border-radius:10px;
+}
+.hataMesaj {
+    background-color: #fbbcbc;
+    color: darkred;
+    border: 2px solid darkred;
+    padding: 15px;
+    border-radius: 7px;
+    margin: 30px 0;
+    text-align:center;
+}

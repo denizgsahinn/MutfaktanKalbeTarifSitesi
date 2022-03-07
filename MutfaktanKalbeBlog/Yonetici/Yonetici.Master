@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Yonetici.Master.cs" Inherits="MutfaktanKalbeBlog.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Mutfaktan Kalbe Yönetim Sistemi</title>
+    <link href="Css/adminlayout.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="menuBar">
+            <div class="logo">
+                <h2 style="font-style:italic;">YÖNETİM SAYFASI</h2>
+            </div>
+
+            <div class="user">
+                <label class="lblCikis">Çıkış yap</label>
+                    <a href="Giris.aspx"><img src="../assets/images/arrow.jpg" /></a>
+            </div>
+        </div>
+        <div>
+            <div class="solMenu">
+                <ul class="menu">
+                   <%-- <div class="profilIcon">
+                        <div class="icon">
+                            <img src="../assets/images/avatar.jpg" />
+                        </div>
+                    </div>--%>
+                    <img src="../assets/images/Mutfaktan%20Kalbe%20Tarifler.gif" style="height:180px;width:180px;margin-left:35px;"/> 
+                    <div class="kullaniciAdi">
+                        <asp:Label ID="lbl_kullanici" runat="server" style="font-size:18pt;font-weight:800;"></asp:Label>
+                    </div>
+                     
+  
+
+                    <a href="Default.aspx">
+                        <li style="margin-top:30px;border-top:1px solid silver;">Anasayfa</li>
+                    </a>
+
+                     <a href="Default.aspx">
+                        <li>En Çok Görüntülenen Makaleler</li>
+                    </a>
+                    
+                     <a href="OnayBekleyenYorumlar.aspx">
+                        <li>Onay Bekleyen Yorumlar</li>
+                    </a>
+                    <a href="#">
+                        <li>Üyeleri Listele</li>
+                    </a>
+                </ul>
+            </div>
+            <div class="icerik">
+                
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

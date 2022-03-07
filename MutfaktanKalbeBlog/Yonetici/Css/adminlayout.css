@@ -1,0 +1,165 @@
+﻿*, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Calibri;
+    background-image: url('../../assets/images/background.jpg');
+}
+
+.menuBar {
+    height: 80px;
+    background-color: #c9184a;
+    position: fixed;
+    width: 100%;
+}
+
+.logo {
+    padding-top: 20px;
+    padding-left: 50px;
+    color: white;
+    float: left;
+}
+
+.lblCikis{
+  
+    font-size:12pt;
+    float:left;
+    margin-top:5px;
+}
+
+
+
+.user {
+    padding-top: 20px;
+    padding-right: 50px;
+    color: white;
+    float: right;
+}
+
+    .user a {
+        color: white;
+        text-decoration: none;
+        
+    }
+
+    .user span {
+        font-size: 14pt;
+        font-weight: bold;
+        
+
+    }
+    .user img {
+        width: 35px;
+        height: 35px;
+        padding-left:10px;
+        float: right;
+    }
+
+
+.solMenu {
+    margin-top: 80px;
+    width: 250px;
+    background-color: #fef8ee; /*#fae1dd;*/ /*#e3d5ca*/
+    height: 801px;
+    float: left;
+    border-right: 1px solid gray;
+}
+
+.menu {
+    list-style-type: none;
+
+}
+
+    .menu a {
+        color: #a01a58;
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+        .menu a li {
+            padding: 17px;
+            padding-left: 20px;
+            border-bottom: 1px solid silver;
+            
+        }
+
+        .menu a:hover li {
+            background-color: #e8a598;
+        }
+
+    .menu .kullaniciAdi {
+        border: 2px dotted #0d3b66;
+        padding: 10px;
+        text-align: center;
+        width: 150px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 15px;
+        border-radius: 10px;
+        background-color: #f7c59f; /*#ffc49b;*/
+        color: #0d3b66;
+    }
+
+
+    .icerik {
+        width: 1048px;
+        float: left;
+        padding: 25px;
+        margin-top: 80px;
+        
+    }
+.profilIcon {
+    height: 160px;
+    width: 140px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    margin: 30px auto;
+   
+}
+
+    .profilIcon .icon img{
+        height:160px;
+        width:140px;
+    }
+
+.section {
+    margin-left: 30px;
+    width: 300px;
+    border:1px dotted #9206d3;
+    border-radius:30px;
+    height: 750px;
+    float: left;
+    background-color:aliceblue;
+}
+    .section img {
+        width: 200px;
+        height: 225px;
+        margin-left: 50px;
+        margin-top: 25px;
+        border-radius: 50%;
+    }
+        .section .option {
+            width: 200px;
+            padding: 15px;
+            border: 1px solid silver;
+            border-radius: 10px;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+.section a{
+    text-decoration:none;
+    font-size:14pt;
+    
+}
+
+    .section .option:hover {
+        background-color: #ffb3c1;
+    }
+
+
+
+/*---------EKLEME  -----------*/
+
