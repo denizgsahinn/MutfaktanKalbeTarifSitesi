@@ -1,0 +1,95 @@
+﻿*, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Calibri;
+}
+.container {
+    width: 1000px;
+    margin: 0px auto;
+
+}
+.contentHeader {
+    border: 1px solid silver;
+    padding: 7px;
+    margin: 0px;
+    float: left;
+    width: 986px;
+    background-color:crimson;
+    /*background-color:aqua;*/
+
+}
+
+    .contentHeader img {
+        height: 80px;
+        width: 80px;
+        float: left;
+        border: 1px solid silver;
+        border-radius: 10px;
+    }
+
+.user {
+    width: 350px;
+    float: right;
+    padding-top: 30px;
+    text-align: right;
+}
+
+    .user a {
+        color: #ffffff;
+        text-decoration: none;
+        border-top: 1px solid silver;
+        border-bottom: 1px solid silver;
+        border-radius:10px;
+        padding: 10px 10px;
+        font-weight: 800;
+        margin-right:10px;
+        margin-left:10px;
+    }
+
+.pageName {
+    font-size: 20pt;
+    font-family: 'Courier New';
+    /*color: #dc00bc;*/
+    color:aliceblue;
+    font-weight: 900;
+    font-style: italic;
+    padding-left: 30px;
+    padding-top: 10px;
+    float: left;
+}
+
+.choises {
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 60px;
+    background-color: silver;
+    margin-top: 96px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+    .choises ul li {
+        list-style: none;
+        float: left;
+        border: 1px solid black;
+        border-radius: 10px;
+        padding: 10px 20px;
+        font-size: 14pt;
+        margin-left:70px;
+        margin-right: 60px;
+        margin-top: 10px;
+        align-items: center;
+    }
+
+        .choises ul li a {
+            text-decoration: none;
+            color: brown;
+        }
+
+    .choises h4 {
+        padding: 15px;
+        font-size: 16pt;
+    }

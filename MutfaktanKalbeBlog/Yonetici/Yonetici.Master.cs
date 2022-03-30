@@ -27,5 +27,16 @@ namespace MutfaktanKalbeBlog
             Session["yonetici"] = null;  // burda sessionu sıfırlıyoruz
             Response.Redirect("Giris.aspx");
         }
+
+        protected void lb_back_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminDefault.aspx");
+        }
+
+        protected void lb_anasayfa_Click(object sender, EventArgs e)
+        {
+            Session["yonetici"] = null;  // burda sessionu sıfırlıyoruz
+            Response.Redirect("../Default.aspx");
+        }
     }
 }

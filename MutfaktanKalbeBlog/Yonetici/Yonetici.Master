@@ -6,6 +6,7 @@
 <head runat="server">
     <title>Mutfaktan Kalbe Yönetim Sistemi</title>
     <link href="Css/adminlayout.css" rel="stylesheet" />
+    <link rel="stylesheet" href="Css/fontawesome-free-6.1.1-web/css/all.min.css"/>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -18,46 +19,48 @@
 
             <div class="user">
                 <label class="lblCikis">Çıkış yap</label>
-                    <a href="Giris.aspx"><img src="../assets/images/arrow.jpg" /></a>
+                    <asp:LinkButton ID="lb_cikis" runat="server" OnClick="lbtn_cikisYap_Click"><img src="../assets/images/arrow.jpg" /></asp:LinkButton>
+             
             </div>
         </div>
         <div>
             <div class="solMenu">
                 <ul class="menu">
-                   <%-- <div class="profilIcon">
-                        <div class="icon">
-                            <img src="../assets/images/avatar.jpg" />
-                        </div>
-                    </div>--%>
                     <img src="../assets/images/Mutfaktan%20Kalbe%20Tarifler.gif" style="height:180px;width:180px;margin-left:35px;"/> 
                     <div class="kullaniciAdi">
+                        <i class="fa-solid fa-user-secret fa-2xl" style="margin-right:10px;"></i>
                         <asp:Label ID="lbl_kullanici" runat="server" style="font-size:18pt;font-weight:800;"></asp:Label>
                     </div>
-                     
-  
-
-                    <a href="Default.aspx">
-                        <li style="margin-top:30px;border-top:1px solid silver;">Anasayfa</li>
-                    </a>
-
-                     <a href="Default.aspx">
-                        <li>En Çok Görüntülenen Makaleler</li>
+           
+                    <asp:LinkButton ID="lb_anasayfa" runat="server" OnClick="lb_anasayfa_Click" CssClass="anasayfaText">
+                        <li>Web Sitesi Anasayfasına Git</li>
+                    </asp:LinkButton>
+                    
+                     <a href="EnCokGoruntulenenTarifler.aspx">
+                        <li>En Çok Görüntülenen Tarifler</li>
                     </a>
                     
                      <a href="OnayBekleyenYorumlar.aspx">
                         <li>Onay Bekleyen Yorumlar</li>
                     </a>
-                    <a href="#">
+                    <a href="UyeleriListele.aspx">
                         <li>Üyeleri Listele</li>
                     </a>
+                    
                 </ul>
             </div>
             <div class="icerik">
-                
+               
+                <asp:LinkButton ID="lb_back" runat="server" CssClass="backMainpage" OnClick="lb_back_Click"> <img src="../assets/images/home-page.png" />ANASAYFA</asp:LinkButton>
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
         </div>
     </form>
+    <script src="ckeditor/ckeditor.js"></script>
+     <script>
+         /*CKEDITOR.replace('ContentPlaceHolder1_tb_yapilisAsamalari');*/
+         CKEDITOR.replace('ContentPlaceHolder1_tb_makIcerik');
+     </script>
 </body>
 </html>

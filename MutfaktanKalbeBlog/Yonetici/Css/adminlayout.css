@@ -8,6 +8,8 @@ body {
     background-image: url('../../assets/images/background.jpg');
 }
 
+
+
 .menuBar {
     height: 80px;
     background-color: #c9184a;
@@ -29,14 +31,35 @@ body {
     margin-top:5px;
 }
 
-
-
-.user {
-    padding-top: 20px;
-    padding-right: 50px;
-    color: white;
-    float: right;
+.backMainpage {
+    text-decoration: none;
+    border: 1px solid silver;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 15px;
+    background-color: #a9fff2;
+    color: #a01a58;
+    display:table-cell;
+/*    float:left;*/
 }
+
+    .backMainpage:hover{
+        background-color:hotpink;
+        color:aliceblue;
+    }
+    .backMainpage img {
+        
+        height: 25px;
+        width: 25px;
+        margin-right: 10px;
+    }
+
+    .user {
+        padding-top: 20px;
+        padding-right: 50px;
+        color: white;
+        float: right;
+    }
 
     .user a {
         color: white;
@@ -82,7 +105,6 @@ body {
             padding: 17px;
             padding-left: 20px;
             border-bottom: 1px solid silver;
-            
         }
 
         .menu a:hover li {
@@ -94,9 +116,11 @@ body {
         padding: 10px;
         text-align: center;
         width: 150px;
-        margin-left: auto;
+        /*margin-left: auto;
         margin-right: auto;
         margin-top: 15px;
+        margin-bottom:15px;*/
+        margin:15px auto;
         border-radius: 10px;
         background-color: #f7c59f; /*#ffc49b;*/
         color: #0d3b66;
@@ -107,7 +131,7 @@ body {
         width: 1048px;
         float: left;
         padding: 25px;
-        margin-top: 80px;
+        margin-top: 60px;
         
     }
 .profilIcon {
@@ -124,7 +148,7 @@ body {
         width:140px;
     }
 
-.section {
+/*.section {
     margin-left: 30px;
     width: 300px;
     border:1px dotted #9206d3;
@@ -157,9 +181,52 @@ body {
 
     .section .option:hover {
         background-color: #ffb3c1;
-    }
+    }*/
 
 
 
 /*---------EKLEME  -----------*/
 
+.section {
+    margin-left: 7px;
+    margin-right: 18px;
+    margin-top: 20px;
+    width: 1000px;
+    border: 1px dotted #9206d3;
+    border-radius: 30px;
+  /*  height: 140px;*/
+    padding:15px; 
+    float: left;
+    background-color: #ecbcfd;
+}
+
+    .section img {
+        width: 100px;
+        height: 125px;       
+        margin-left: 15px;
+        border-radius: 50%;
+        float:left;
+    }
+
+    .section .option {
+        float: left;
+        background-color: aliceblue;
+        padding: 15px;
+        margin-left: 40px;
+        margin-top: 40px;
+        border: 1px solid silver;
+        border-radius: 10px;
+        text-align:justify;
+
+    }
+
+    .section a {
+        text-decoration: none;
+        font-size: 12pt;
+        color: #ce3706;
+
+    }
+
+    .section .option:hover {
+        background-color: #fae0e4;
+    }

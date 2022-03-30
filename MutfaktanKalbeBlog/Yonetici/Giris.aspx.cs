@@ -29,7 +29,7 @@ namespace MutfaktanKalbeBlog
                 if (y != null)
                 {
                     Session["yonetici"] = y;//boxing işlemi yapar
-                    Response.Redirect("Default.aspx");
+                    Response.Redirect("AdminDefault.aspx");
                 }
                 else
                 {

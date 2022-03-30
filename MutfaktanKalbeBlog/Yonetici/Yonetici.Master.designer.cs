@@ -33,6 +33,15 @@ namespace MutfaktanKalbeBlog
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// lb_cikis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lb_cikis;
+
+        /// <summary>
         /// lbl_kullanici control.
         /// </summary>
         /// <remarks>
@@ -40,6 +49,24 @@ namespace MutfaktanKalbeBlog
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_kullanici;
+
+        /// <summary>
+        /// lb_anasayfa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lb_anasayfa;
+
+        /// <summary>
+        /// lb_back control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lb_back;
 
         /// <summary>
         /// ContentPlaceHolder1 control.

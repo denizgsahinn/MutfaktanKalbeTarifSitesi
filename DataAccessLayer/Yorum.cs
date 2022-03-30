@@ -12,7 +12,7 @@ namespace DataAccessLayer
         public int UyeID { get; set; }
         public string Uye { get; set; }
         public int MakaleID { get; set; }
-        public string Baslik { get; set; }  // makalenin başlığı
+        public string MakaleBaslik { get; set;}
         public string Icerik { get; set; }
         public DateTime Tarih { get; set; }
         public bool Durum { get; set; }

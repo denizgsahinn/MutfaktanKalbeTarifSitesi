@@ -4,16 +4,67 @@
 
 <html>
 <head runat="server">
-    <title></title>
+    <title>Admin Master Page</title>
+    <link href="assets/Css/MainPageStyle.css" rel="stylesheet" />
+    <link href="assets/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+        <div class="container">
+            <div style="position: fixed;">
+                <div class="contentHeader">
+                    <a href="Default.aspx">
+                        <img src="assets/images/mktLogo.jpg" /></a>
+                    <div style="width: 300px; float: left;">
+                        <label class="pageName">MUTFAKTAN KALBE TARİFLER</label>
+                    </div>
+                    <div class="user">                      
+                        <asp:Panel ID="pnlGirisVar" runat="server">
+                            <i class="fa-solid fa-user-secret fa-2xl" style="margin-right:10px;"></i>
+                            Merhaba
+                        <asp:Label ID="lbl_uye" runat="server"></asp:Label>
+                            |
+                        <asp:LinkButton ID="lbtn_cikis" runat="server" OnClick="lbtn_cikis_Click">Çıkış Yap</asp:LinkButton>
+                        </asp:Panel>
+                        <asp:Panel ID="pnl_girisyok" runat="server">
+                            <a href="UyeGiris.aspx">Üye Girişi</a>|<a href="UyeOl.aspx">Üye Ol</a>
+                            |<a href="Yonetici/Giris.aspx">Yönetici Girişi</a>          
+                        </asp:Panel>
+                    </div>
+
+                    <div style="clear: both"></div>
+
+                </div>
+                <div class="choises">
+                    <ul>
+                        <li>
+                             <a href="Default.aspx"><i class="fa-solid fa-house fa-xl" style="margin-right:10px;"></i> </a>
+                            <asp:LinkButton ID="lb_anasayfa" runat="server" OnClick="lb_anasayfa_Click">Anasayfa</asp:LinkButton>
+                        </li>
+                        <li>
+                            <asp:LinkButton ID="lb_tarifler" runat="server" OnClick="lb_tarifler_Click">Tarifler</asp:LinkButton>
+                        </li>
+                        <li>
+                            <asp:LinkButton ID="lb_kacKalori" runat="server" OnClick="lb_kacKalori_Click">Kaç Kalori</asp:LinkButton>
+                        </li>
+                        <li>
+                            <asp:LinkButton ID="lb_blog" runat="server" OnClick="lb_blog_Click">Blog</asp:LinkButton>
+                        </li>
+                        
+                    </ul>
+
+                </div>
+            </div>
+            
+            <div style="margin-top:180px;">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
         </div>
+
     </form>
 </body>
 </html>

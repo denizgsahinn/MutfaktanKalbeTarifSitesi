@@ -4,3 +4,9 @@ C:\Users\Deniz\source\repos\MutfaktanKalbeBlog\DataAccessLayer\obj\Debug\DataAcc
 C:\Users\Deniz\source\repos\MutfaktanKalbeBlog\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
 C:\Users\Deniz\source\repos\MutfaktanKalbeBlog\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 C:\Users\Deniz\source\repos\MutfaktanKalbeBlog\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\Deniz\Documents\GitHub\MutfaktanKalbeTarifSitesi\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\Deniz\Documents\GitHub\MutfaktanKalbeTarifSitesi\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\Deniz\Documents\GitHub\MutfaktanKalbeTarifSitesi\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\Deniz\Documents\GitHub\MutfaktanKalbeTarifSitesi\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Deniz\Documents\GitHub\MutfaktanKalbeTarifSitesi\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\Deniz\Documents\GitHub\MutfaktanKalbeTarifSitesi\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

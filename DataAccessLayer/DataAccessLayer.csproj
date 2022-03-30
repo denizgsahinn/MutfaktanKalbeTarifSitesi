@@ -42,10 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BesinKalori.cs" />
+    <Compile Include="BlogKategori.cs" />
     <Compile Include="ConnectionStrings.cs" />
     <Compile Include="DataModel.cs" />
+    <Compile Include="KaloriKategorileri.cs" />
     <Compile Include="Kategori.cs" />
     <Compile Include="Makale.cs" />
+    <Compile Include="MakaleKategori.cs" />
     <Compile Include="OzelGunListeleri.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tarif.cs" />

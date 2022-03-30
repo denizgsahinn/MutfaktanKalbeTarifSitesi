@@ -94,12 +94,12 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "SELECT Durum FROM Yorumlar WHERE ID=@id";
+                cmd.CommandText = "SELECT OnayDurum FROM Yorumlar WHERE ID=@id";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", id);
                 con.Open();
                 bool durum = (bool)cmd.ExecuteScalar();
-                cmd.CommandText = "UPDATE Yorumlar SET Durum=@d WHERE ID=@id";
+                cmd.CommandText = "UPDATE Yorumlar SET OnayDurum=@d WHERE ID=@id";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", id);
                 cmd.Parameters.AddWithValue("d", !durum);
@@ -172,7 +172,7 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "INSERT INTO Uyeler(Isim, Soyisim, KullaniciAdi, Email, Sifre, UyelikTarihi, Durum) VALUES(@isim,@soyisim,@kullaniciAdi,@email,@sifre,@uyelikTarihi,@durum)";
+                cmd.CommandText = "INSERT INTO Uyeler(Isim, Soyisim, KullaniciAdi, Email, Sifre, UyelikTarihi, Fotograf, Durum) VALUES(@isim,@soyisim,@kullaniciAdi,@email,@sifre,@uyelikTarihi, @fotograf, @durum)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@isim", uye.Isim);
                 cmd.Parameters.AddWithValue("@soyisim", uye.Soyisim);
@@ -180,6 +180,7 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@email", uye.Email);
                 cmd.Parameters.AddWithValue("@sifre", uye.Sifre);
                 cmd.Parameters.AddWithValue("@uyelikTarihi", uye.UyelikTarihi);
+                cmd.Parameters.AddWithValue("@fotograf", uye.Fotograf);
                 cmd.Parameters.AddWithValue("@durum", uye.Durum);
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -201,7 +202,7 @@ namespace DataAccessLayer
             {
                 List<Uye> uyeler = new List<Uye>();
 
-                cmd.CommandText = "SELECT ID, Isim, Soyisim, KullaniciAdi, Email, Sifre, UyelikTarihi, Fotograf, Durum FROM Uyeler";
+                cmd.CommandText = "SELECT ID, Isim, Soyisim, KullaniciAdi, Email, UyelikTarihi, Fotograf, Durum FROM Uyeler";
                 cmd.Parameters.Clear();
                 con.Open();
 
@@ -214,7 +215,7 @@ namespace DataAccessLayer
                     uye.Isim = reader.GetString(1);
                     uye.Soyisim = reader.GetString(2);
                     uye.KullaniciAdi = reader.GetString(3);
-                    uye.Sifre = reader.GetString(4);
+                    uye.Email = reader.GetString(4);
                     uye.UyelikTarihi = reader.GetDateTime(5);
                     uye.Fotograf = reader.GetString(6);
                     uye.Durum = reader.GetBoolean(7);
@@ -274,18 +275,44 @@ namespace DataAccessLayer
             {
                 cmd.CommandText = "UPDATE Uyeler SET Isim=@isim, Soyisim=@soyisim, KullaniciAdi=@kullaniciadi, Email=@email, Sifre=@sifre, Fotograf=@fotograf, Durum=@durum  WHERE ID =@id";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@isim",uye.Isim);
-                cmd.Parameters.AddWithValue("@soyisim",uye.Soyisim);
-                cmd.Parameters.AddWithValue("@kullaniciadi",uye.KullaniciAdi);
-                cmd.Parameters.AddWithValue("@email",uye.Email);
-                cmd.Parameters.AddWithValue("@sifre",uye.Sifre);
-                cmd.Parameters.AddWithValue("@fotograf",uye.Fotograf);
-                cmd.Parameters.AddWithValue("@durum",uye.Durum); // üyelik sonlandırmak için olabilir belki
+                cmd.Parameters.AddWithValue("@isim", uye.Isim);
+                cmd.Parameters.AddWithValue("@soyisim", uye.Soyisim);
+                cmd.Parameters.AddWithValue("@kullaniciadi", uye.KullaniciAdi);
+                cmd.Parameters.AddWithValue("@email", uye.Email);
+                cmd.Parameters.AddWithValue("@sifre", uye.Sifre);
+                cmd.Parameters.AddWithValue("@fotograf", uye.Fotograf);
+                cmd.Parameters.AddWithValue("@durum", uye.Durum); // üyelik sonlandırmak için olabilir belki
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
             }
             catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool UyeDurumDegistir(int id)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT Durum FROM Uyeler WHERE ID=@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                bool durum = (bool)cmd.ExecuteScalar();
+                cmd.CommandText = "UPDATE Uyeler SET Durum=@d WHERE ID=@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("d", !durum);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
             {
                 return false;
             }
@@ -298,15 +325,15 @@ namespace DataAccessLayer
         #endregion
 
 
-        #region Kategori Metotları
+        #region Tarif Kategori Metotları
 
-        public bool KategoriEkle(Kategori k)
+        public bool TarifKategoriEkle(Kategori k)
         {
             try
             {
                 cmd.CommandText = "INSERT INTO Kategoriler(Isim) VALUES(@isim)";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@isim",k.Isim);
+                cmd.Parameters.AddWithValue("@isim", k.Isim);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -321,7 +348,7 @@ namespace DataAccessLayer
             }
         }
 
-        public List<Kategori> KategoriListele()
+        public List<Kategori> TarifKategoriListele()
         {
             try
             {
@@ -352,13 +379,13 @@ namespace DataAccessLayer
             }
         }
 
-        public Kategori KategoriGetir(int id)
+        public Kategori TarifKategoriGetir(int id)
         {
             try
             {
                 cmd.CommandText = "SELECT ID,Isim FROM Kategoriler WHERE ID= @id";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@id",id);
+                cmd.Parameters.AddWithValue("@id", id);
                 con.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -383,7 +410,7 @@ namespace DataAccessLayer
             }
         } // tek bir tane kategori
 
-        public bool KategoriSil(int id)
+        public bool TarifKategoriSil(int id)
         {
             try
             {
@@ -403,8 +430,8 @@ namespace DataAccessLayer
                 con.Close();
             }
         }
-        
-        public bool KategoriGuncelle(Kategori k)
+
+        public bool TarifKategoriGuncelle(Kategori k)
         {
             try
             {
@@ -437,10 +464,13 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "INSERT INTO Besin_Kalori(Besin_adi, Besin_degeri) VALUES (@besin_adi, @besin_degeri)";
+                cmd.CommandText = "INSERT INTO Besin_Kalori(Besin_adi, kaloriKategoriID, Besin_degeri, Miktar, PorsiyonKarsiligi) VALUES (@besin_adi, @kalorikategoriID, @besin_degeri, @miktar, @porsiyonkarsiligi)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@besin_adi", bk.Besin_adi);
+                cmd.Parameters.AddWithValue("@kalorikategoriID", bk.kaloriKategoriID);
                 cmd.Parameters.AddWithValue("@besin_degeri", bk.Besin_degeri);
+                cmd.Parameters.AddWithValue("@miktar", bk.Miktar);
+                cmd.Parameters.AddWithValue("@porsiyonkarsiligi", bk.PorsiyonKarsiligi);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -462,7 +492,7 @@ namespace DataAccessLayer
             {
                 List<BesinKalori> besinkalorileri = new List<BesinKalori>();
 
-                cmd.CommandText = "SELECT ID, Besin_adi, Besin_degeri FROM Besin_Kalori ";
+                cmd.CommandText = "SELECT BK.ID, BK.Besin_adi, BK.kaloriKategoriID, KK.Isim, BK.Besin_degeri, BK.Miktar,BK.PorsiyonKarsiligi FROM Besin_Kalori AS BK JOIN KaloriKategorileri AS KK ON KK.ID=BK.kaloriKategoriID  ";
                 cmd.Parameters.Clear();
                 con.Open();
 
@@ -472,7 +502,47 @@ namespace DataAccessLayer
                     BesinKalori bk = new BesinKalori();
                     bk.ID = reader.GetInt32(0);
                     bk.Besin_adi = reader.GetString(1);
-                    bk.Besin_degeri = reader.GetInt16(2);
+                    bk.kaloriKategoriID = reader.GetInt32(2);
+                    bk.kaloriKategoriAdi = reader.GetString(3);
+                    bk.Besin_degeri = reader.GetInt16(4);
+                    bk.Miktar = reader.GetString(5);
+                    bk.PorsiyonKarsiligi = reader.GetString(6);
+                    besinkalorileri.Add(bk);
+                }
+                return besinkalorileri;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<BesinKalori> KalorileriListele(int katid)
+        {
+            try
+            {
+                List<BesinKalori> besinkalorileri = new List<BesinKalori>();
+
+                cmd.CommandText = "SELECT BK.ID, BK.Besin_adi, BK.kaloriKategoriID, KK.Isim, BK.Besin_degeri, BK.Miktar,BK.PorsiyonKarsiligi FROM Besin_Kalori AS BK JOIN KaloriKategorileri AS KK ON KK.ID=BK.kaloriKategoriID WHERE BK.kaloriKategoriID=@id  ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", katid);
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    BesinKalori bk = new BesinKalori();
+                    bk.ID = reader.GetInt32(0);
+                    bk.Besin_adi = reader.GetString(1);
+                    bk.kaloriKategoriID = reader.GetInt32(2);
+                    bk.kaloriKategoriAdi = reader.GetString(3);
+                    bk.Besin_degeri = reader.GetInt16(4);
+                    bk.Miktar = reader.GetString(5);
+                    bk.PorsiyonKarsiligi = reader.GetString(6);
                     besinkalorileri.Add(bk);
                 }
                 return besinkalorileri;
@@ -491,7 +561,7 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "SELECT ID, Besin_adi, Besin_degeri FROM Besin_Kalori WHERE ID = @id";
+                cmd.CommandText = "SELECT ID, KaloriKategoriID, Besin_adi, Besin_degeri, Miktar,PorsiyonKarsiligi FROM Besin_Kalori WHERE ID = @id";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", id);
                 con.Open();
@@ -503,8 +573,11 @@ namespace DataAccessLayer
                 while (reader.Read())
                 {
                     bk.ID = reader.GetInt32(0);
-                    bk.Besin_adi = reader.GetString(1);
-                    bk.Besin_degeri = reader.GetInt16(2);
+                    bk.kaloriKategoriID = reader.GetInt32(1);
+                    bk.Besin_adi = reader.GetString(2);
+                    bk.Besin_degeri = reader.GetInt16(3);
+                    bk.Miktar = reader.GetString(4);
+                    bk.PorsiyonKarsiligi = reader.GetString(5);
                 }
                 return bk;
 
@@ -544,10 +617,15 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "UPDATE Besin_Kalori SET Besin_adi=@besin_adi, Besin_degeri=@besin_degeri  WHERE ID= @id";
+                cmd.CommandText = "UPDATE Besin_Kalori SET Besin_adi=@besin_adi, Besin_degeri=@besin_degeri, kaloriKategoriID=@kalorikategoriId, Miktar=@miktar, PorsiyonKarsiligi=@porsiyonkarsiligi  WHERE ID= @id";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@besin_adi", bk.Besin_adi);
                 cmd.Parameters.AddWithValue("@besin_degeri", bk.Besin_degeri);
+                cmd.Parameters.AddWithValue("@kalorikategoriId", bk.kaloriKategoriID);
+                cmd.Parameters.AddWithValue("@miktar", bk.Miktar);
+                cmd.Parameters.AddWithValue("@porsiyonkarsiligi", bk.PorsiyonKarsiligi);
+                cmd.Parameters.AddWithValue("@id",bk.ID);
+
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -555,6 +633,141 @@ namespace DataAccessLayer
             }
             catch (Exception ex)
             {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool KaloriKategoriEkle(KaloriKategorileri kk)
+        {
+            try
+            {
+                cmd.CommandText = "INSERT INTO KaloriKategorileri(Isim,Fotograf) VALUES (@isim, @fotograf)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@isim", kk.Isim);
+                cmd.Parameters.AddWithValue("@fotograf", kk.Fotograf);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<KaloriKategorileri> KaloriKategoriListele()
+        {
+
+            try
+            {
+                List<KaloriKategorileri> kalorikategorileri = new List<KaloriKategorileri>();
+
+                cmd.CommandText = "SELECT ID, Isim, Fotograf FROM KaloriKategorileri";
+                cmd.Parameters.Clear();
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    KaloriKategorileri kk = new KaloriKategorileri();
+                    kk.ID = reader.GetInt32(0);
+                    kk.Isim = reader.GetString(1);
+                    kk.Fotograf = reader.GetString(2);
+                    kalorikategorileri.Add(kk);
+                }
+                return kalorikategorileri;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+
+
+        }
+
+        public KaloriKategorileri BesinKategoriGetir(int id)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT ID, Isim, Fotograf FROM KaloriKategorileri WHERE ID = @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                KaloriKategorileri kk = new KaloriKategorileri();
+
+                while (reader.Read())
+                {
+                    kk.ID = reader.GetInt32(0);
+                    kk.Isim = reader.GetString(1);
+                    kk.Fotograf = reader.GetString(2);
+                }
+                return kk;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool BesinKategoriSil(int id)
+        {
+            try
+            {
+                cmd.CommandText = "DELETE FROM KaloriKategorileri WHERE ID=@id ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool KaloriKategoriGuncelle(KaloriKategorileri kk)
+        {
+            try
+            {
+                cmd.CommandText = "UPDATE KaloriKategorileri SET Isim = @isim WHERE ID = @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@isim", kk.Isim);
+                cmd.Parameters.AddWithValue("@id", kk.ID);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+
                 return false;
             }
             finally
@@ -790,6 +1003,134 @@ namespace DataAccessLayer
             }
         }
 
+        public bool BlogKategoriEkle(BlogKategori bk)
+        {
+            try
+            {
+                cmd.CommandText = "INSERT INTO MakaleKategori(Isim) VALUES (@isim)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@isim", bk.Isim);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<BlogKategori> BlogKategoriListele()
+        {
+
+            try
+            {
+                List<BlogKategori> blogKategoriler = new List<BlogKategori>();
+
+                cmd.CommandText = "SELECT ID,Isim FROM MakaleKategori";
+                cmd.Parameters.Clear();
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    BlogKategori bk = new BlogKategori();
+                    bk.ID = reader.GetInt32(0);
+                    bk.Isim = reader.GetString(1);
+                    blogKategoriler.Add(bk);
+                }
+                return blogKategoriler;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool BlogKategoriSil(int id)
+        {
+            try
+            {
+                cmd.CommandText = "DELETE FROM MakaleKategori WHERE ID= @id ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool BlogKategoriGuncelle(BlogKategori bk)
+        {
+            try
+            {
+                cmd.CommandText = "UPDATE MakaleKategori SET Isim = @isim WHERE ID = @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@isim", bk.Isim);
+                cmd.Parameters.AddWithValue("@id", bk.ID);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public BlogKategori BlogKategoriGetir(int id)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT ID,Isim FROM MakaleKategori WHERE ID= @id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                BlogKategori bk = new BlogKategori();
+
+                while (reader.Read())
+                {
+                    bk.ID = reader.GetInt32(0);
+                    bk.Isim = reader.GetString(1);
+                }
+                return bk;
+            }
+            catch (Exception ex)
+            {
+
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
 
 
@@ -800,7 +1141,7 @@ namespace DataAccessLayer
             List<Yorum> yorumlar = new List<Yorum>();
             try
             {
-                cmd.CommandText = "SELECT Y.ID, Y.UyeID, U.KullaniciAdi, Y.MakaleID, M.Baslik, Y.Icerik, Y.YorumTarihi, Y.OnayDurum FROM Yorumlar AS Y JOIN Uyeler AS U ON U.ID = Y.UyeID JOIN Makaleler AS M ON M.ID=Y.MakaleID";
+                cmd.CommandText = "SELECT Y.ID, Y.UyeID, U.KullaniciAdi, M.ID, M.Baslik, Y.Icerik, Y.YorumTarihi, Y.OnayDurum FROM Yorumlar AS Y JOIN Uyeler AS U ON U.ID = Y.UyeID JOIN Makaleler AS M ON M.ID=Y.MakaleID";
                 cmd.Parameters.Clear();
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -811,7 +1152,7 @@ namespace DataAccessLayer
                     y.UyeID = reader.GetInt32(1);
                     y.Uye = reader.GetString(2);
                     y.MakaleID = reader.GetInt32(3);
-                    y.Baslik = reader.GetString(4);
+                    y.MakaleBaslik = reader.GetString(4);
                     y.Icerik = reader.GetString(5);
                     y.Tarih = reader.GetDateTime(6);
                     y.Durum = reader.GetBoolean(7);
@@ -846,7 +1187,7 @@ namespace DataAccessLayer
                     y.UyeID = reader.GetInt32(1);
                     y.Uye = reader.GetString(2);
                     y.MakaleID = reader.GetInt32(3);
-                    y.Baslik = reader.GetString(4);
+                    y.MakaleBaslik = reader.GetString(4);
                     y.Icerik = reader.GetString(5);
                     y.Tarih = reader.GetDateTime(6);
                     y.Durum = reader.GetBoolean(7);
@@ -881,7 +1222,7 @@ namespace DataAccessLayer
                     y.UyeID = reader.GetInt32(1);
                     y.Uye = reader.GetString(2);
                     y.MakaleID = reader.GetInt32(3);
-                    y.Baslik = reader.GetString(4);
+                    y.MakaleBaslik = reader.GetString(4);
                     y.Icerik = reader.GetString(5);
                     y.Tarih = reader.GetDateTime(6);
                     y.Durum = reader.GetBoolean(7);
@@ -924,6 +1265,27 @@ namespace DataAccessLayer
             }
         }
 
+        public bool YorumSil(int id)
+        {
+            try
+            {
+                cmd.CommandText = "DELETE FROM Yorumlar WHERE ID=@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         #endregion
 
 
@@ -933,11 +1295,10 @@ namespace DataAccessLayer
         {
             try
             {
-                cmd.CommandText = "INSERT INTO Tarifler(kategori_id, Isim, Aciklama, Servis_sayisi, Pisirme_suresi, Pisirme_derecesi, Kalori_bilgisi, Malzemeler, Yapilis_Asamalari, Fotograf, GoruntulenmeSayisi, EklemeTarihi, Durum) VALUES(@kategoriId, @isim, @aciklama, @servis_sayisi, @pisirme_suresi, @pisirme_derecesi, @kalori_bilgisi, @malzemeler, @yapilis_Asamalari, @fotograf, @goruntulenmeSayisi, @eklemetarihi, @durum )";
+                cmd.CommandText = "INSERT INTO Tarifler(kategori_id, Isim, Servis_sayisi, Pisirme_suresi, Pisirme_derecesi, Kalori_bilgisi, Malzemeler, Yapilis_Asamalari, Fotograf ,GoruntulenmeSayisi, EklemeTarihi, Durum) VALUES(@kategori_id, @isim, @servis_sayisi, @pisirme_suresi, @pisirme_derecesi, @kalori_bilgisi, @malzemeler, @yapilis_Asamalari, @fotograf, @goruntulenmeSayisi, @eklemetarihi, @durum )";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@kategoriId", t.kategori_id);
+                cmd.Parameters.AddWithValue("@kategori_id", t.kategori_id);
                 cmd.Parameters.AddWithValue("@isim", t.Isim);
-                cmd.Parameters.AddWithValue("@aciklama", t.Aciklama);
                 cmd.Parameters.AddWithValue("@servis_sayisi", t.Servis_sayisi);
                 cmd.Parameters.AddWithValue("@pisirme_suresi", t.Pisirme_suresi);
                 cmd.Parameters.AddWithValue("@pisirme_derecesi", t.Pisirme_derecesi);
@@ -960,17 +1321,20 @@ namespace DataAccessLayer
             {
                 con.Close();
             }
+
         }
 
-        public List<Tarif> TarifListele(int kategoriID)
+        public List<Tarif> TarifListele(int kategoriID,bool onay)
         {
+            List<Tarif> tarifler = new List<Tarif>();
+
             try
             {
-                List<Tarif> tarifler = new List<Tarif>();
 
-                cmd.CommandText = "SELECT T.ID, T.kategori_id, K.Isim, T.Isim, T.Aciklama, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id = @id ";
+                cmd.CommandText = "SELECT T.ID, T.Isim, T.kategori_id, K.Isim, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id WHERE T.kategori_id=@id AND T.Durum=@onay ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", kategoriID);
+                cmd.Parameters.AddWithValue("@onay", onay);
                 con.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -978,9 +1342,9 @@ namespace DataAccessLayer
                 {
                     Tarif t = new Tarif();
                     t.ID = reader.GetInt32(0);
-                    t.kategori_id = reader.GetInt32(1);
-                    t.kategoriAdi = reader.GetString(2);
-                    t.Aciklama = reader.GetString(3);
+                    t.Isim = reader.GetString(1);
+                    t.kategori_id = reader.GetInt32(2);
+                    t.kategoriAdi = reader.GetString(3);
                     t.Servis_sayisi = reader.GetInt16(4);
                     t.Pisirme_suresi = reader.GetInt16(5);
                     t.Pisirme_derecesi = reader.GetInt16(6);
@@ -1005,15 +1369,185 @@ namespace DataAccessLayer
             }
         }
 
+        public List<Tarif> TarifListele()
+        {
+            List<Tarif> tarifler = new List<Tarif>();
+            try
+            {
+
+                cmd.CommandText = "SELECT T.ID, T.kategori_id, K.Isim, T.Isim, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id";
+                cmd.Parameters.Clear();
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Tarif t = new Tarif();
+                    t.ID = reader.GetInt32(0);
+                    t.kategori_id = reader.GetInt32(1);
+                    t.kategoriAdi = reader.GetString(2);
+                    t.Isim = reader.GetString(3);
+                    t.Servis_sayisi = reader.GetInt16(4);
+                    t.Pisirme_suresi = reader.GetInt16(5);
+                    t.Pisirme_derecesi = reader.GetInt16(6);
+                    t.Kalori_bilgisi = reader.GetString(7);
+                    t.Malzemeler = reader.GetString(8);
+                    t.Yapilis_Asamalari = reader.GetString(9);
+                    t.Fotograf = reader.GetString(10);
+                    t.GoruntulenmeSayisi = reader.GetInt32(11);
+                    t.EklemeTarih = reader.GetDateTime(12);
+                    t.Durum = reader.GetBoolean(13);
+                    tarifler.Add(t);
+                }
+                return tarifler;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<Tarif> TarifListele(bool onay)
+        {
+            List<Tarif> tarifler = new List<Tarif>();
+            try
+            {
+
+                cmd.CommandText = "SELECT T.ID, T.kategori_id, K.Isim, T.Isim, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id WHERE T.Durum=@onay";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@onay", onay);
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Tarif t = new Tarif();
+                    t.ID = reader.GetInt32(0);
+                    t.kategori_id = reader.GetInt32(1);
+                    t.kategoriAdi = reader.GetString(2);
+                    t.Isim = reader.GetString(3);
+                    t.Servis_sayisi = reader.GetInt16(4);
+                    t.Pisirme_suresi = reader.GetInt16(5);
+                    t.Pisirme_derecesi = reader.GetInt16(6);
+                    t.Kalori_bilgisi = reader.GetString(7);
+                    t.Malzemeler = reader.GetString(8);
+                    t.Yapilis_Asamalari = reader.GetString(9);
+                    t.Fotograf = reader.GetString(10);
+                    t.GoruntulenmeSayisi = reader.GetInt32(11);
+                    t.EklemeTarih = reader.GetDateTime(12);
+                    t.Durum = reader.GetBoolean(13);
+                    tarifler.Add(t);
+                }
+                return tarifler;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<Tarif> TarifListele(int kategoriID)
+        {
+            List<Tarif> tarifler = new List<Tarif>();
+
+            try
+            {
+
+                cmd.CommandText = "SELECT T.ID, T.Isim, T.kategori_id, K.Isim, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id WHERE T.kategori_id=@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", kategoriID);
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Tarif t = new Tarif();
+                    t.ID = reader.GetInt32(0);
+                    t.Isim = reader.GetString(1);
+                    t.kategori_id = reader.GetInt32(2);
+                    t.kategoriAdi = reader.GetString(3);
+                    t.Servis_sayisi = reader.GetInt16(4);
+                    t.Pisirme_suresi = reader.GetInt16(5);
+                    t.Pisirme_derecesi = reader.GetInt16(6);
+                    t.Kalori_bilgisi = reader.GetString(7);
+                    t.Malzemeler = reader.GetString(8);
+                    t.Yapilis_Asamalari = reader.GetString(9);
+                    t.Fotograf = reader.GetString(10);
+                    t.GoruntulenmeSayisi = reader.GetInt32(11);
+                    t.EklemeTarih = reader.GetDateTime(12);
+                    t.Durum = reader.GetBoolean(13);
+                    tarifler.Add(t);
+                }
+                return tarifler;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public Tarif TarifGetir(int id)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT T.ID, T.kategori_id, K.Isim, T.Isim, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id WHERE T.ID=@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                Tarif trf = new Tarif();
+
+                while (reader.Read())
+                {
+                    trf.ID = reader.GetInt32(0);
+                    trf.kategori_id = reader.GetInt32(1);
+                    trf.kategoriAdi = reader.GetString(2);
+                    trf.Isim = reader.GetString(3);
+                    trf.Servis_sayisi = reader.GetInt16(4);
+                    trf.Pisirme_suresi = reader.GetInt16(5);
+                    trf.Pisirme_derecesi = reader.GetInt16(6);
+                    trf.Kalori_bilgisi = reader.GetString(7);
+                    trf.Malzemeler = reader.GetString(8);
+                    trf.Yapilis_Asamalari = reader.GetString(9);
+                    trf.Fotograf = reader.GetString(10);
+                    trf.GoruntulenmeSayisi = reader.GetInt32(11);
+                    trf.EklemeTarih = reader.GetDateTime(12);
+                    trf.Durum = reader.GetBoolean(13);
+                }
+                return trf;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public bool TarifGuncelle(Tarif tarif)
         {
             try
             {
-                cmd.CommandText = "UPDATE Tarifler SET kategori_id=@kategoriId, Isim=@isim, Aciklama=@aciklama, Servis_sayisi=@servis_sayisi, Pisirme_suresi=@pisirme_suresi, Pisirme_derecesi=@pisirme_derecesi, Kalori_bilgisi=@kalori_bilgisi, Malzemeler=@malzemeler, Yapilis_Asamalari=@yapilis_Asamalari, Fotograf=@fotograf, Durum=@durum WHERE ID=@id";
+                cmd.CommandText = "UPDATE Tarifler SET kategori_id=@kategoriId, Isim=@isim, Servis_sayisi=@servis_sayisi, Pisirme_suresi=@pisirme_suresi, Pisirme_derecesi=@pisirme_derecesi, Kalori_bilgisi=@kalori_bilgisi, Malzemeler=@malzemeler, Yapilis_Asamalari=@yapilis_Asamalari, Fotograf=@fotograf, Durum=@durum WHERE ID=@id";
                 cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", tarif.ID);
                 cmd.Parameters.AddWithValue("@kategoriId", tarif.kategori_id);
                 cmd.Parameters.AddWithValue("@isim", tarif.Isim);
-                cmd.Parameters.AddWithValue("@aciklama", tarif.Aciklama);
                 cmd.Parameters.AddWithValue("@servis_sayisi", tarif.Servis_sayisi);
                 cmd.Parameters.AddWithValue("@pisirme_suresi", tarif.Pisirme_suresi);
                 cmd.Parameters.AddWithValue("@pisirme_derecesi", tarif.Pisirme_derecesi);
@@ -1022,7 +1556,7 @@ namespace DataAccessLayer
                 cmd.Parameters.AddWithValue("@yapilis_Asamalari", tarif.Yapilis_Asamalari);
                 cmd.Parameters.AddWithValue("@fotograf", tarif.Fotograf);
                 cmd.Parameters.AddWithValue("@durum", tarif.Durum);
-                cmd.Parameters.AddWithValue("@id", tarif.ID);
+                
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -1056,7 +1590,121 @@ namespace DataAccessLayer
             {
                 con.Close();
             }
-        } 
+        }
+
+        public List<Tarif> PopulerTarifListele()
+        {
+            try
+            {
+                List<Tarif> populerTarifler = new List<Tarif>();
+
+                cmd.CommandText = "SELECT T.ID, T.kategori_id, K.Isim, T.Isim, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id WHERE T.GoruntulenmeSayisi>20 ";
+                cmd.Parameters.Clear();
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                for (int i = 0; i < 3; i++)
+                {
+                    while (reader.Read())
+                    {
+                        Tarif t = new Tarif();
+                        t.ID = reader.GetInt32(0);
+                        t.kategori_id = reader.GetInt32(1);
+                        t.kategoriAdi = reader.GetString(2);
+                        t.Isim = reader.GetString(3);
+                        t.Servis_sayisi = reader.GetInt16(4);
+                        t.Pisirme_suresi = reader.GetInt16(5);
+                        t.Pisirme_derecesi = reader.GetInt16(6);
+                        t.Kalori_bilgisi = reader.GetString(7);
+                        t.Malzemeler = reader.GetString(8);
+                        t.Yapilis_Asamalari = reader.GetString(9);
+                        t.Fotograf = reader.GetString(10);
+                        t.GoruntulenmeSayisi = reader.GetInt32(11);
+                        t.EklemeTarih = reader.GetDateTime(12);
+                        t.Durum = reader.GetBoolean(13);
+                        populerTarifler.Add(t);
+                    }
+                }
+                return populerTarifler;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool TarifDurumDeğiştir(int id)
+        {
+            try
+            {
+                cmd.CommandText = "SELECT Durum FROM Tarifler WHERE ID=@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                con.Open();
+                bool durum = (bool)cmd.ExecuteScalar();
+                cmd.CommandText = "UPDATE Tarifler SET Durum=@d WHERE ID=@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("d", !durum);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<Tarif> YayimlananTarifler(bool onay)
+        {
+            List<Tarif> tarifler = new List<Tarif>();
+            try
+            {
+
+                cmd.CommandText = "SELECT T.ID, T.Isim, T.kategori_id, K.Isim, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id WHERE T.Durum=@onay ";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@onay", onay);
+                con.Open();
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Tarif t = new Tarif();
+                    t.ID = reader.GetInt32(0);
+                    t.Isim = reader.GetString(1);
+                    t.kategori_id = reader.GetInt32(2);
+                    t.kategoriAdi = reader.GetString(3);
+                    t.Servis_sayisi = reader.GetInt16(4);
+                    t.Pisirme_suresi = reader.GetInt16(5);
+                    t.Pisirme_derecesi = reader.GetInt16(6);
+                    t.Kalori_bilgisi = reader.GetString(7);
+                    t.Malzemeler = reader.GetString(8);
+                    t.Yapilis_Asamalari = reader.GetString(9);
+                    t.Fotograf = reader.GetString(10);
+                    t.GoruntulenmeSayisi = reader.GetInt32(11);
+                    t.EklemeTarih = reader.GetDateTime(12);
+                    t.Durum = reader.GetBoolean(13);
+                    tarifler.Add(t);
+                }
+                return tarifler;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
 
         #endregion
 
@@ -1083,9 +1731,7 @@ namespace DataAccessLayer
             }
         }
 
-        //public bool OzelGuneTarifEkle(Tarif t)
-        //{
+      
 
-        //}
     }
 }

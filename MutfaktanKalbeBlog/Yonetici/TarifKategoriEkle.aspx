@@ -6,7 +6,7 @@
     
     <div class="formContainer">
         <div class="formtitle">
-            <h3>Tarif Kategorisi Ekle</h3>
+            <h3>Kategori Ekle</h3>
         </div>
          <div class="formContent">
             <asp:Panel ID="pnl_basarili" runat="server" CssClass="basariliMesaj" Visible="false">
@@ -19,8 +19,15 @@
                 <label>Kategori Adı</label><br />
                 <asp:TextBox ID="tb_isim" runat="server" CssClass="formInput"></asp:TextBox>
             </div>
+             <%--<div class="row">
+                <label>Kategori Türü (İkisinden birini seçiniz: Tarif / Blog Yazı)</label><br />
+                <asp:TextBox ID="tb_tur" runat="server" CssClass="formInput"></asp:TextBox>
+            </div>--%>
             <div class="row">
-                <asp:LinkButton ID="lbtn_ekle" runat="server" OnClick="lbtn_ekle_Click" CssClass="formButton">Kategori Ekle</asp:LinkButton>
+                <asp:LinkButton ID="lbtn_ekle" runat="server" OnClick="lbtn_ekle_Click" CssClass="formButton">Kategori Ekle</asp:LinkButton>  
+            </div>
+            <div class="row">
+                <asp:LinkButton ID="lb_katListele" runat="server" CssClass="formButton right2" OnClick="lb_katListele_Click">Kategorileri Listele</asp:LinkButton>
             </div>
         </div>
     </div>
