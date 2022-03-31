@@ -816,7 +816,7 @@ namespace DataAccessLayer
             try
             {
                 List<Makale> makaleler = new List<Makale>();
-                cmd.CommandText = "SELECT M.ID,M.KategoriID,K.Isim,M.YazarID,Y.Isim+' '+Y.Soyisim,M.Baslik,M.Ozet,M.Icerik,M.KapakResim,M.GoruntulenmeSayisi,M.EklemeTarihi,M.Durum FROM Makaleler AS M JOIN Kategoriler AS K ON K.ID = M.KategoriID JOIN Yoneticiler AS Y ON Y.ID = M.YazarID";
+                cmd.CommandText = "SELECT M.ID,M.KategoriID,K.Isim,M.YazarID,Y.Isim+' '+Y.Soyisim,M.Baslik,M.Ozet,M.Icerik,M.KapakResim,M.GoruntulenmeSayisi,M.EklemeTarihi,M.Durum FROM Makaleler AS M JOIN MakaleKategori AS K ON K.ID = M.KategoriID JOIN Yoneticiler AS Y ON Y.ID = M.YazarID";
                 cmd.Parameters.Clear();
                 con.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
@@ -1598,13 +1598,16 @@ namespace DataAccessLayer
             {
                 List<Tarif> populerTarifler = new List<Tarif>();
 
-                cmd.CommandText = "SELECT T.ID, T.kategori_id, K.Isim, T.Isim, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id WHERE T.GoruntulenmeSayisi>20 ";
+                cmd.CommandText = "SELECT T.ID, T.kategori_id, K.Isim, T.Isim, T.Servis_sayisi, T.Pisirme_suresi, T.Pisirme_derecesi, T.Kalori_bilgisi, T.Malzemeler, T.Yapilis_Asamalari, T.Fotograf, T.GoruntulenmeSayisi, T.EklemeTarihi, T.Durum FROM Tarifler AS T JOIN Kategoriler AS K ON K.ID = T.kategori_id ";  //  WHERE T.GoruntulenmeSayisi>20 
                 cmd.Parameters.Clear();
                 con.Open();
 
                 SqlDataReader reader = cmd.ExecuteReader();
-                for (int i = 0; i < 3; i++)
+
+                for (int i = 0; i < 9; i++)
                 {
+                    
+
                     while (reader.Read())
                     {
                         Tarif t = new Tarif();

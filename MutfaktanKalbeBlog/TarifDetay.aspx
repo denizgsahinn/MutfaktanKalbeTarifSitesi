@@ -87,38 +87,3 @@
         </div>
     </div>
 </asp:Content>
-<%--    <div class="row info">
-            <label>Kategori: </label>
-            <span>
-                <asp:Literal ID="ltrl_kategori" runat="server"></asp:Literal></span>
-        </div>
-        <div class="row info">
-            <label>Servis Sayısı:</label>
-            <span>
-                <asp:Literal ID="ltrl_servis" runat="server"></asp:Literal></span>
-        </div>
-        <div class="row info">
-            <label>Pişirme Süresi: </label>
-            <span>
-                <asp:Literal ID="ltrl_sure" runat="server"></asp:Literal></span>
-        </div>
-        <div class="row info">
-            <label>Pişirme Derecesi:</label>
-            <span>
-                <asp:Literal ID="ltrl_derece" runat="server"></asp:Literal></span>
-        </div>
-        <div class="row info">
-            <label>Kalori Bilgisi:</label>
-            <span>
-                <asp:Literal ID="ltrl_kalori" runat="server"></asp:Literal></span>
-        </div>
-        <div class="row info">
-            <label>Eklenme Tarihi: </label>
-            <span>
-                <asp:Literal ID="ltrl_ekleTarih" runat="server"></asp:Literal></span>
-        </div>
-        <div class="row info">
-            <label>Görüntülenme Sayısı:</label>
-            <span>
-                <asp:Literal ID="ltrl_goruntulenme" runat="server"></asp:Literal></span>
-        </div>--%>

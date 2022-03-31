@@ -8,7 +8,7 @@
         </div>
          <div class="formLongContent">
              <asp:Panel ID="pnl_basarili" runat="server" CssClass="basariliMesaj" Visible="false">
-                <label>Makale Ekleme İşlemi Başarıyla Gerçekleştirildi</label>
+                <label>Tarif Ekleme İşlemi Başarıyla Gerçekleştirildi</label>
             </asp:Panel>
             <asp:Panel ID="pnl_basarisiz" runat="server" CssClass="basarisizMesaj" Visible="false">
                 <asp:Label ID="lbl_mesaj" runat="server"></asp:Label>
@@ -23,11 +23,11 @@
                     <asp:DropDownList ID="ddl_kategoriler" runat="server" CssClass="formInput" DataTextField="Isim" DataValueField="ID"></asp:DropDownList>
                 </div>
                  <div class="row">
-                      <label style="font-size:12pt;">Servis Sayısı</label><br />
+                      <label style="font-size:12pt;">Servis Sayısı (Kişi)</label><br />
                     <asp:TextBox ID="tb_servisSayi" runat="server" CssClass="formInput2"></asp:TextBox>
                  </div>
                  <div class="row">
-                      <label style="font-size:12pt;">Pişirme Süresi</label><br />
+                      <label style="font-size:12pt;">Pişirme Süresi (dk) </label><br />
                     <asp:TextBox ID="tb_pisirmeSure" runat="server" CssClass="formInput2"></asp:TextBox>
                  </div>
                  <div class="row">
@@ -35,7 +35,7 @@
                     <asp:TextBox ID="tb_pisirmeDerece" runat="server" CssClass="formInput2"></asp:TextBox>
                  </div>
                  <div class="row">
-                      <label style="font-size:12pt;">Kalori Bilgisi</label><br />
+                      <label style="font-size:12pt;">Kalori Bilgisi (kcal)</label><br />
                     <asp:TextBox ID="tb_kaloriBilgi" runat="server" CssClass="formInput2"></asp:TextBox>
                  </div>   
                 <div class="row">

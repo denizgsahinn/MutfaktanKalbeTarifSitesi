@@ -40,12 +40,13 @@
                  </div>   
                
             </div>
-              <div class="row">
+              
+            <div style="width:500px; float:left;margin-top:30px;">
+                <div class="row">
                     <label style="font-size:12pt;">Kapak Resim</label><br /><br />
-                      <asp:Image ID="img_resim" runat="server" Width="300" /><br />
+                      <asp:Image ID="img_resim" runat="server" Width="200" Height="150" /><br />
                     Seçiniz : <asp:FileUpload ID="fu_resim" runat="server" />
                 </div>
-            <div style="width:500px; float:left;margin-top:30px;">
                 <div class="row">
                     <label>Malzemeler</label><br />
                      <asp:TextBox ID="tb_malzemeler" runat="server" CssClass="formInput" TextMode="MultiLine" Width="475px"></asp:TextBox>

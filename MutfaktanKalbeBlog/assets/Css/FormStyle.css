@@ -8,18 +8,21 @@ body {
 }
 
 .container {
+/*    margin-left: 180px;*/
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid silver;
-    min-height: 1000px;
+    /*border: 1px solid silver;*/
+    min-height:1000px;
+
 }
 
 .contentHeader {
     border-bottom: 1px solid silver;
     padding: 7px;
     margin: 0px;
-    float: left;
+/*    float: left;*/
     width: 986px;
+
 }
 
     .contentHeader img {
@@ -103,10 +106,11 @@ body {
 .cardContainer {
     margin-left: auto;
     margin-right: auto;
-    /*border: 1px solid silver;*/
-    border-bottom: 2px solid silver;
+/*    border: 1px solid silver;*/
+    /*border-bottom: 2px solid silver;*/
     padding-top: 20px;
-    min-height: 400px;
+    min-height: 800px;
+ /*   margin-top:150px;*/
 }
 
 .card {
@@ -222,6 +226,8 @@ body {
 .kaloriContainer {
     margin: 20px 0px;
     min-height: 400px;
+    float:left;
+    
     /*    background-color:aqua;*/
 }
 
@@ -247,7 +253,8 @@ body {
 }
 
 .menucontainer {
-    width: 175px;
+    /*width: 175px;*/
+    width: 18%;
     padding: 20px 10px 0 0;
     float: left;
     min-height: 500px;
@@ -276,7 +283,7 @@ body {
             }
 
 .catTitle {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     float: left;
     margin-bottom: 20px;
     margin-top: 10px;
@@ -293,10 +300,11 @@ body {
     }
 
 .listTable {
-    width: 75%;
+    width: 100%;
     border-top: 1px solid silver;
     float: left;
-    margin-left: 25px;
+    margin-left: 20px;
+    margin-bottom:20px;
 }
 
     .listTable tr th {
@@ -326,6 +334,8 @@ body {
     margin-left: 20px;
     float: left;
     padding-bottom: 10px;
+    text-align: center;
+
 }
 
     .cardTarif a {
@@ -351,8 +361,12 @@ body {
     border: 1px solid silver;
     margin-bottom: 13px;
     padding: 10px;
-    text-align: center;
-    font-size: 14pt;
+    
+}
+
+.cardTarif label {
+    font-size: 12pt;
+    font-weight: 800;
 }
 
 .cardButton {
@@ -533,3 +547,12 @@ body {
     .yorumitem label {
         color: orangered;
     }
+
+.listeleScroll {
+    /*  border:1px solid silver;*/
+    margin-left: 5px;
+    float: left;
+    width: 78%;
+    overflow-y: scroll;
+    height: 550px;
+}

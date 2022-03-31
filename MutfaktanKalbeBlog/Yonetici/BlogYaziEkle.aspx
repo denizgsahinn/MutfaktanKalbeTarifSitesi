@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="addArticleContainer">
         <div class="subtitle">
-            <div class="formContent">
+            <%--<div class="formContent">--%>
                 <asp:Panel ID="pnl_basarili" runat="server" CssClass="basariliMesaj" Visible="false">
                     <label>Kategori Ekleme İşlemi Başarıyla Gerçekleştirildi</label>
                 </asp:Panel>
@@ -21,12 +21,12 @@
                     <asp:LinkButton ID="lbtn_katEkle" runat="server" OnClick="lbtn_katEkle_Click" CssClass="formButton2">Kategorilere Ekle</asp:LinkButton><br />
                     <asp:LinkButton ID="lbtn_katListele" runat="server" CssClass="formButton2 right3" OnClick="lbtn_katListele_Click">Kategorileri Listele</asp:LinkButton>
                 </div>
-            </div>
+            <%--</div>--%>
         </div>
-        <div class="formtitle" style="padding:10px;">
+        <div class="formtitle" style="padding:10px;margin-top:20px;">
             <h3>Blog Yazısı Ekle</h3>
         </div>
-                <div class="formContent">
+                <div class="formContent2">
                    <%-- <asp:Panel ID="pnl_basarili2" runat="server" CssClass="basariliMesaj" Visible="false">
                         <label>Makale Ekleme İşlemi Başarıyla Gerçekleştirildi</label>
                     </asp:Panel>

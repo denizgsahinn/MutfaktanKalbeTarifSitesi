@@ -2140,7 +2140,6 @@
     <Content Include="Yonetici\BlogKategoriGuncelle.aspx" />
     <Content Include="Yonetici\BlogKategoriListele.aspx" />
     <Content Include="Yonetici\BlogYaziEkle.aspx" />
-    <Content Include="Yonetici\BlogYaziKategoriListele.aspx" />
     <Content Include="Yonetici\ckeditor\adapters\jquery.js" />
     <Content Include="Yonetici\ckeditor\build-config.js" />
     <Content Include="Yonetici\ckeditor\ckeditor.js" />
@@ -4687,13 +4686,6 @@
     </Compile>
     <Compile Include="Yonetici\BlogYaziEkle.aspx.designer.cs">
       <DependentUpon>BlogYaziEkle.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Yonetici\BlogYaziKategoriListele.aspx.cs">
-      <DependentUpon>BlogYaziKategoriListele.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Yonetici\BlogYaziKategoriListele.aspx.designer.cs">
-      <DependentUpon>BlogYaziKategoriListele.aspx</DependentUpon>
     </Compile>
     <Compile Include="Yonetici\AdminDefault.aspx.cs">
       <DependentUpon>AdminDefault.aspx</DependentUpon>

@@ -20,9 +20,9 @@
 
                             <th>Isim</th>
                             <th>Kategori</th>
-                            <th>Miktar</th>
-                            <th>Porsiyon</th>
-                            <th>Kalori</th>
+                            <th>Miktar (Gr) </th>
+                            <th>Porsiyon </th>
+                            <th>Kalori (kcal)</th>
                             <th>Seçenekler</th>
                         </tr>
                         <asp:PlaceHolder ID="ItemPlaceHolder" runat="server"></asp:PlaceHolder>

@@ -59,7 +59,7 @@
     </form>
     <script src="ckeditor/ckeditor.js"></script>
      <script>
-         /*CKEDITOR.replace('ContentPlaceHolder1_tb_yapilisAsamalari');*/
+         CKEDITOR.replace('ContentPlaceHolder1_tb_yapilisAsamalari');
          CKEDITOR.replace('ContentPlaceHolder1_tb_makIcerik');
      </script>
 </body>

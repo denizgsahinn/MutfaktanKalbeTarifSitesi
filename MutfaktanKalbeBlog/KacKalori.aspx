@@ -21,35 +21,38 @@
             <br />
         </div>
 
-        <asp:Panel ID="pnl_kategoriIsim" runat="server">
-            <div class="catTitle">
-                <asp:Label ID="lbl_kategori" runat="server"></asp:Label>
-            </div>
-        </asp:Panel>
+        <div class="listeleScroll">
+
+            <asp:Panel ID="pnl_kategoriIsim" runat="server">
+                <div class="catTitle">
+                    <asp:Label ID="lbl_kategori" runat="server"></asp:Label>
+                </div>
+            </asp:Panel>
 
 
 
-        <asp:ListView ID="lv_besinKalorileri" runat="server" OnItemCommand="lv_besinKalorileri_ItemCommand">
-            <LayoutTemplate>
-                <table class="listTable" cellspacing="0" cellpadding="0">
+            <asp:ListView ID="lv_besinKalorileri" runat="server" OnItemCommand="lv_besinKalorileri_ItemCommand">
+                <LayoutTemplate>
+                    <table class="listTable" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>Yiyecek</th>
+                            <th>Kalori</th>
+                            <th>Miktar</th>
+                            <th>Porsiyon</th>
+                        </tr>
+                        <asp:PlaceHolder ID="ItemPlaceHolder" runat="server"></asp:PlaceHolder>
+                    </table>
+                </LayoutTemplate>
+                <ItemTemplate>
                     <tr>
-                        <th>Yiyecek</th>
-                        <th>Kalori</th>
-                        <th>Miktar</th>
-                        <th>Porsiyon</th>
-                    </tr>
-                    <asp:PlaceHolder ID="ItemPlaceHolder" runat="server"></asp:PlaceHolder>
-                </table>
-            </LayoutTemplate>
-            <ItemTemplate>
-                <tr>
-                    <td><%# Eval("Besin_adi") %></td>
-                    <td><%# Eval("Besin_degeri") %> &nbsp;Kcal</td>
-                    <td><%# Eval("Miktar") %>&nbsp;Gram</td>
-                    <td><%# Eval("PorsiyonKarsiligi") %></td>
+                        <td><%# Eval("Besin_adi") %></td>
+                        <td><%# Eval("Besin_degeri") %> &nbsp;Kcal</td>
+                        <td><%# Eval("Miktar") %>&nbsp;Gram</td>
+                        <td><%# Eval("PorsiyonKarsiligi") %></td>
 
-                </tr>
-            </ItemTemplate>
-        </asp:ListView>
+                    </tr>
+                </ItemTemplate>
+            </asp:ListView>
+        </div>
     </div>
 </asp:Content>
